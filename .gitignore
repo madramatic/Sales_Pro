@@ -1,0 +1,87 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+.packages
+*.tmp
+*.pid
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code related
+.vscode/
+*.code-workspace
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+*.generated.*
+*.snap
+.lock
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# iOS related
+ios/Podfile
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/.symlinks/
+ios/Pods/
+ios/Podfile.lock
+
+# Ignore macOS-specific files
+macos/Podfile
+macos/Flutter-Debug.xcconfig
+macos/Flutter-Release.xcconfig
+macos/GeneratedPluginRegistrant.swift
+
+# Android related
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/.gradle/
+android/local.properties
+android/.idea/
+android/build/
+
+# System specific
+Thumbs.db
+
+# iOS build artifacts
+ios/Pods/
+ios/DerivedData/
+*.xcworkspace
+*.xcuserstate
+
+# Possibly other build artifacts
+build/
+
+# Ignore environment variables
+assets/.env
+.env
