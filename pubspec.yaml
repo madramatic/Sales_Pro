@@ -12,8 +12,11 @@ dependencies:
   go_router: ^15.1.2
   url_launcher: ^6.3.1
   flutter_dotenv: ^5.1.0
-  google_maps_flutter: ^2.10.1
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
   flutter_riverpod: ^2.6.1
+  flutter_map_marker_cluster: ^1.2.0
+  flutter_map_marker_popup: ^7.0.0
 
 dev_dependencies:
   flutter_test:
