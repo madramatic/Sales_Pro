@@ -1,30 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sales_pro/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:sales_pro/shared/presentation/widgets/app_checkbox.dart';
+import 'package:sales_pro/shared/presentation/widgets/custom_snackbar.dart';
 import 'package:sales_pro/shared/presentation/widgets/primary_button.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../providers/auth_providers.dart';
+import '../providers/login_state_notifier.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  LoginScreenState createState() => LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
-  void initState() {
-    super.initState();
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<LoginState>(loginStateNotifierProvider, (previous, next) {
+      if (next is LoginSuccess) {
+        CustomSnackbar.showSuccess(
+          context,
+          'Welcome back, ${next.user.fullName}!',
+        );
+
+        ref.read(currentUserProvider.notifier).state = next.user;
+
+        context.go('/maps');
+      } else if (next is LoginFailure) {
+        CustomSnackbar.showError(context, next.message);
+      }
+    });
+
+    final loginState = ref.watch(loginStateNotifierProvider);
+    final isLoading = loginState is LoginLoading;
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -46,19 +69,21 @@ class LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 28),
                   Text(
                     'Continue with email',
-                    style: theme.textTheme.titleMedium,
+                    style: theme.textTheme.titleLarge!
+                        .copyWith(fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   Text(
                     'To get started, enter email address and password.',
-                    style: theme.textTheme.bodyLarge,
+                    style: theme.textTheme.bodyLarge!
+                        .copyWith(fontWeight: FontWeight.w300),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 32),
                   AuthTextField(
-                    controller: usernameController,
-                    hintText: 'Your Email',
+                    controller: _emailController,
+                    hint: 'Your Email',
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -72,9 +97,9 @@ class LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 12),
                   AuthTextField(
-                    controller: passwordController,
-                    hintText: 'Password',
-                    isPassword: !_isPasswordVisible,
+                    controller: _passwordController,
+                    hint: 'Password',
+                    obscureText: !_isPasswordVisible,
                     suffixIcon: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -111,10 +136,11 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 32),
                   PrimaryButton(
                     text: 'LOGIN',
-                    onPressed: () => context.go('/maps'),
+                    isLoading: isLoading,
+                    onPressed: _handleLogin,
                     icon: Icons.arrow_forward_ios_rounded,
                   ),
                   const SizedBox(height: 8),
@@ -146,5 +172,18 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _handleLogin() {
+    if (_formKey.currentState!.validate()) {
+      // Hide keyboard
+      FocusScope.of(context).unfocus();
+
+      // Trigger login
+      ref.read(loginStateNotifierProvider.notifier).login(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+          );
+    }
   }
 }
