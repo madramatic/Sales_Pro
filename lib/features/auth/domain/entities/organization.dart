@@ -4,7 +4,7 @@ class Organization extends Equatable {
   final int id;
   final String name;
   final String slug;
-  final String status;
+  final bool status;
   final String createdAt;
 
   const Organization({

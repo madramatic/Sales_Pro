@@ -4,7 +4,7 @@ class Role extends Equatable {
   final int id;
   final String name;
   final String slug;
-  final String userCount;
+  final int userCount;
 
   const Role({
     required this.id,
