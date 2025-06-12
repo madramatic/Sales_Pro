@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 
 class AuthTextField extends StatelessWidget {
-  final String hintText;
-  final bool isPassword;
+  final String hint;
+  final TextEditingController controller;
+  final bool obscureText;
   final TextInputType keyboardType;
-  final Widget? suffixIcon;
-  final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final Widget? suffixIcon;
+  final bool enabled;
 
   const AuthTextField({
     super.key,
-    this.controller,
-    this.isPassword = false,
+    required this.hint,
+    required this.controller,
+    this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.suffixIcon,
     this.validator,
-    required this.hintText,
+    this.suffixIcon,
+    this.enabled = true,
   });
 
   @override
@@ -24,27 +26,48 @@ class AuthTextField extends StatelessWidget {
 
     return TextFormField(
       controller: controller,
-      obscureText: isPassword,
+      obscureText: obscureText,
       keyboardType: keyboardType,
+      validator: validator,
+      enabled: enabled,
       style: theme.textTheme.bodyLarge,
       decoration: InputDecoration(
-        suffixIcon: suffixIcon,
-        hintText: hintText,
-        hintStyle: theme.textTheme.bodyLarge!.copyWith(
-          color: theme.colorScheme.onSecondary,
-        ),
         filled: true,
         fillColor: theme.colorScheme.secondary,
+        hintText: hint,
+        suffixIcon: suffixIcon,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 12.0,
           vertical: 16.0,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: theme.colorScheme.onPrimary.withOpacity(0.5),
+            width: 1,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: theme.colorScheme.error,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: theme.colorScheme.error,
+            width: 2,
+          ),
+        ),
       ),
-      validator: validator,
     );
   }
 }
