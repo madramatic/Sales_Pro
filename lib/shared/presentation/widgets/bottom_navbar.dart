@@ -11,8 +11,8 @@ class BottomNavBar extends StatelessWidget {
     final theme = Theme.of(context);
     return ClipRRect(
       borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(20),
-        topRight: Radius.circular(20),
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
       ),
       child: BottomNavigationBar(
         selectedIconTheme: const IconThemeData(size: 28),
