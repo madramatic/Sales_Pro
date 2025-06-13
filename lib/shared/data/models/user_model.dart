@@ -1,7 +1,7 @@
-import 'package:sales_pro/features/auth/data/models/organization_model.dart';
-import 'package:sales_pro/features/auth/data/models/role_model.dart';
-import 'package:sales_pro/features/auth/data/models/team_model.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/data/models/organization_model.dart';
+import 'package:sales_pro/shared/data/models/role_model.dart';
+import 'package:sales_pro/shared/data/models/team_model.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 
 class UserModel extends User {
   const UserModel({

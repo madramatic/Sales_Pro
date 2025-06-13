@@ -1,4 +1,4 @@
-import 'package:sales_pro/features/auth/domain/entities/role.dart';
+import 'package:sales_pro/shared/domain/entities/role.dart';
 
 class RoleModel extends Role {
   const RoleModel({

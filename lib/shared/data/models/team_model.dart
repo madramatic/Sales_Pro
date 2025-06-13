@@ -1,4 +1,4 @@
-import 'package:sales_pro/features/auth/domain/entities/team.dart';
+import 'package:sales_pro/shared/domain/entities/team.dart';
 
 class TeamModel extends Team {
   const TeamModel({

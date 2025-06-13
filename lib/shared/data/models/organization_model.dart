@@ -1,4 +1,4 @@
-import 'package:sales_pro/features/auth/domain/entities/organization.dart';
+import 'package:sales_pro/shared/domain/entities/organization.dart';
 
 class OrganizationModel extends Organization {
   const OrganizationModel({

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:sales_pro/features/auth/domain/entities/organization.dart';
-import 'package:sales_pro/features/auth/domain/entities/role.dart';
-import 'package:sales_pro/features/auth/domain/entities/team.dart';
+import 'package:sales_pro/shared/domain/entities/organization.dart';
+import 'package:sales_pro/shared/domain/entities/role.dart';
+import 'package:sales_pro/shared/domain/entities/team.dart';
 
 class User extends Equatable {
   final int id;
