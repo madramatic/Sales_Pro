@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sales_pro/core/network/dio_client.dart';
+import 'package:sales_pro/core/providers/secure_storage_service_provider.dart';
 import 'package:sales_pro/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:sales_pro/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:sales_pro/features/auth/domain/entities/user.dart';
@@ -16,7 +17,8 @@ final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
 // Repository Provider
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final remoteDataSource = ref.read(authRemoteDataSourceProvider);
-  return AuthRepositoryImpl(remoteDataSource);
+  final secureStorage = ref.read(secureStorageServiceProvider);
+  return AuthRepositoryImpl(remoteDataSource, secureStorage);
 });
 
 // Use Case Provider
