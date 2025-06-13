@@ -1,5 +1,5 @@
 import 'package:sales_pro/core/utils/typedef.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 
 abstract class AuthRepository {
   ResultFuture<User> login({

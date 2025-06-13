@@ -1,4 +1,4 @@
-import 'package:sales_pro/features/auth/data/models/user_model.dart';
+import 'package:sales_pro/shared/data/models/user_model.dart';
 
 class LoginResponseModel {
   final String accessToken;

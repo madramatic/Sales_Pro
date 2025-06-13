@@ -5,7 +5,7 @@ import 'package:sales_pro/core/services/secure_storage_service.dart';
 import 'package:sales_pro/core/utils/typedef.dart';
 import 'package:sales_pro/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:sales_pro/features/auth/data/models/login_request_model.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 import 'package:sales_pro/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

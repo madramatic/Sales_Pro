@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sales_pro/core/error/failures.dart';
 import 'package:sales_pro/core/utils/typedef.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 import 'package:sales_pro/features/auth/domain/repositories/auth_repository.dart';
 
 class LoginUseCase {

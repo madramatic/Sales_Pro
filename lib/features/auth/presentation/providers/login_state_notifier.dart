@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 import 'package:sales_pro/features/auth/domain/usecases/login_usecase.dart';
 
 abstract class LoginState extends Equatable {

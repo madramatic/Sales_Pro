@@ -3,7 +3,7 @@ import 'package:sales_pro/core/network/dio_client.dart';
 import 'package:sales_pro/core/providers/secure_storage_service_provider.dart';
 import 'package:sales_pro/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:sales_pro/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:sales_pro/features/auth/domain/entities/user.dart';
+import 'package:sales_pro/shared/domain/entities/user.dart';
 import 'package:sales_pro/features/auth/domain/repositories/auth_repository.dart';
 import 'package:sales_pro/features/auth/domain/usecases/login_usecase.dart';
 import 'package:sales_pro/features/auth/presentation/providers/login_state_notifier.dart';
