@@ -43,7 +43,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   const SizedBox(height: 28),
                   AuthTextField(
                     controller: emailController,
-                    hintText: 'Your Email',
+                    hint: 'Your Email',
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
