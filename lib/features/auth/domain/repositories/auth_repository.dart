@@ -1,5 +1,4 @@
 import 'package:sales_pro/core/utils/typedef.dart';
-import 'package:sales_pro/shared/domain/entities/all_information.dart';
 import 'package:sales_pro/shared/domain/entities/user.dart';
 
 abstract class AuthRepository {
@@ -13,6 +12,4 @@ abstract class AuthRepository {
   ResultFuture<bool> isLoggedIn();
 
   ResultFuture<User?> getCurrentUser();
-
-  ResultFuture<AllInformation> getAllInformation();
 }
