@@ -1,44 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sales_pro/shared/domain/entities/user.dart';
 import 'package:sales_pro/features/auth/domain/usecases/login_usecase.dart';
-
-abstract class LoginState extends Equatable {
-  const LoginState();
-
-  @override
-  List<Object?> get props => [];
-}
-
-class LoginInitial extends LoginState {
-  const LoginInitial();
-}
-
-class LoginLoading extends LoginState {
-  const LoginLoading();
-}
-
-class LoginSuccess extends LoginState {
-  final User user;
-  final String accessToken;
-
-  const LoginSuccess({
-    required this.user,
-    required this.accessToken,
-  });
-
-  @override
-  List<Object> get props => [user, accessToken];
-}
-
-class LoginFailure extends LoginState {
-  final String message;
-
-  const LoginFailure(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
+import 'package:sales_pro/features/auth/presentation/providers/login_state.dart';
 
 class LoginStateNotifier extends StateNotifier<LoginState> {
   final LoginUseCase _loginUseCase;
