@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sales_pro/features/auth/presentation/providers/all_information_state.dart';
+import 'package:sales_pro/features/auth/presentation/providers/login_state.dart';
 import 'package:sales_pro/features/auth/presentation/widgets/auth_text_field.dart';
 import 'package:sales_pro/shared/presentation/widgets/app_checkbox.dart';
 import 'package:sales_pro/shared/presentation/widgets/custom_snackbar.dart';
 import 'package:sales_pro/shared/presentation/widgets/primary_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/auth_providers.dart';
-import '../providers/login_state_notifier.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -40,14 +41,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
         ref.read(currentUserProvider.notifier).state = next.user;
 
-        context.go('/maps');
+        ref
+            .read(allInformationStateNotifierProvider.notifier)
+            .getAllInformation();
       } else if (next is LoginFailure) {
         CustomSnackbar.showError(context, next.message);
       }
     });
 
+    ref.listen<AllInformationState>(allInformationStateNotifierProvider,
+        (previous, next) {
+      if (next is AllInformationSuccess) {
+        context.go('/maps');
+      } else if (next is AllInformationFailure) {
+        CustomSnackbar.showError(
+            context, 'Failed to load app data: ${next.message}');
+        context.go('/maps');
+      }
+    });
+
     final loginState = ref.watch(loginStateNotifierProvider);
-    final isLoading = loginState is LoginLoading;
+    final allInformationState = ref.watch(allInformationStateNotifierProvider);
+
+    final isLoading = loginState is LoginLoading ||
+        allInformationState is AllInformationLoading;
     final theme = Theme.of(context);
 
     return Scaffold(
@@ -176,10 +193,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
-      // Hide keyboard
       FocusScope.of(context).unfocus();
 
-      // Trigger login
       ref.read(loginStateNotifierProvider.notifier).login(
             email: _emailController.text.trim(),
             password: _passwordController.text,
