@@ -4,6 +4,7 @@ class ApiConstants {
 
   /// Endpoints
   static const String loginEndpoint = '/api/auth/login';
+  static const String allInformationEndpoint = 'api/all-information';
 
   /// Headers
   static const Map<String, String> defaultHeaders = {
